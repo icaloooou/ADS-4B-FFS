@@ -9,24 +9,21 @@ def main():
 
 @app.route('/calculaform', methods=['POST'])
 def calculadora():
-    valor1 = request.form['valor1']
-    valor2 = request.form['valor2']
+    valor1 = int(request.form['valor1'])
+    valor2 = int(request.form['valor2'])
     operacao = request.form['operacao']
 
-    v1 = int(valor1)
-    v2 = int(valor2)
-
     if operacao == '+':
-        resultado = v1 + v2
+        resultado = valor1 + valor2
     elif operacao == '-':
-        resultado = v1 - v2
+        resultado = valor1 - valor2
     elif operacao == '*':
-        resultado = v1 * v2
+        resultado = valor1 * valor2
     elif operacao == '/':
-        if v2 == 0:
-            resultado = 'Operação de divisão com zero'
+        if valor2 == 0:
+            resultado = 'Operação de divisão com zero, tente novamente com outro número'
         else:
-            resultado = v1 / v2         
+            resultado = valor1 / valor2         
     else:
         resultado = 'Operação não reconhecida, tente com +, -, * ou /'
     return str(resultado)
