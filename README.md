@@ -3,7 +3,12 @@
 ## Execução de atividades/ trabalhos da matéria Framework Full Stack.
 
 ### Tecnologias utilizadas:
+1. Calculadora:
 - HTML
-- CSS
 - Python
-- Flask 
+- Flask
+2. Project-MVC:
+- HTML
+- Python
+- Flask
+- Banco de dados MySQL
