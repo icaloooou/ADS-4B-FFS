@@ -2,8 +2,8 @@ import os
 from flask import Flask, render_template, request
 from flaskext.mysql import MySQL
 
-mysql = MySQL()
 app = Flask(__name__)
+mysql = MySQL()
 
 # configuracoes MySQL
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -17,6 +17,10 @@ mysql.init_app(app)
 def main():
     return render_template('index.html')
 
+@app.route('/showlogin')
+def showlogin():
+    return render_template('login.html')
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     try:
@@ -28,23 +32,24 @@ def login():
         if _name and _email and _password:
             conn = mysql.connect()
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO project_mvc(name, password, email) VALUES (%s, %s, %s);', (_name, _password, _email))
+            cursor.execute('INSERT INTO project_mvc VALUES (%s, %s, %s);', (_name, _email, _password))
             conn.commit()
 
     except Exception as error:
         print('Problema de inserção no banco de dados: '+ str(error))
     finally:
-        return render_template('layoutlogin.html')
+        return render_template('index.html')
 
-@app.route('/list', methods=['POST', 'GET'])
+@app.route('/lista', methods=['GET'])
 def listagem():
     conn = mysql.connect()
     cursor = conn.cursor()
 
-    cursor.execute('SELECT name, email, password FROM project_mvc')
+    cursor.execute('SELECT name, email FROM project_mvc')
     data = cursor.fetchall()
 
-    return render_template('list.html', data=data)
+    return render_template('lista.html', data=data)
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5002))
