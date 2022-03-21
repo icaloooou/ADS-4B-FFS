@@ -12,3 +12,9 @@
 - Python
 - Flask
 - Banco de dados MySQL
+3. Software Product
+- HTML
+- CSS
+- Python
+- Flask
+- MySQL
